@@ -1,384 +1,170 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>居銮中华中学-成绩资料</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>叶岷轩 生日快乐！</title>
     <style>
-        /* 保持原有的样式 */
+        /* CSS 样式部分 */
         body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            color: black;
-            text-align: center;
-        }
-        /* 针对所有表格的通用样式 */
-        table {
-            border-collapse: collapse; /* 合并单元格边框，确保边框是单一的线 */
-            margin: 0 auto; /* 使表格居中 */
-            border: 2px solid #666; /* 2px 粗细，颜色为深灰色 */
-        }
-        /* 针对所有表格内部单元格的通用样式 */
-        td {
-            padding: 2px;
-            border: 2px solid #666; /* 2px 粗细，颜色与外部边框一致 */
-            padding-left: 5px; 
-        }
-        .input-section {
-            margin-bottom: 20px;
-        }
-        /* 调整输入框和按钮的样式 */
-        .input-section input[type="text"], .input-section button {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            margin-right: 10px; /* 增加右侧间距 */
-            vertical-align: middle; /* 使输入框和按钮对齐 */
-        }
-        .input-section input[type="text"] {
-            width: 200px;
-        }
-        .input-section label {
-            font-weight: bold; /* 标签仍然保持粗体 */
-            margin-right: 10px;
-            vertical-align: middle; /* 使标签对齐 */
-        }
-
-        /* 移除底部通知文本的边框 */
-        #noticeTable {
-            border: none;
-        }
-        #noticeTable td {
-            border: none;
-        }
-
-        /* 照片占位框的样式 */
-        #studentPhoto {
-            width: 80px; 
-            height: 100px; 
-            background-color: #f0f0f0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            font-size: 10px; 
-            color: #666; 
-            text-align: center;
-            overflow: hidden; 
-        }
-        #studentPhoto img {
-            max-width: 100%; 
-            max-height: 100%;
-            display: block; 
-            object-fit: contain; 
-        }
-
-        /* 可编辑单元格的样式 */
-        .editable-score {
-            cursor: pointer; 
-            font-weight: 500; 
-        }
-        .editable-score input[type="text"] {
-            width: 100%;
+            font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+            margin: 0;
             padding: 0;
-            border: none;
+            background: linear-gradient(135deg, #f0f8ff, #e6e6fa); /* 浅色渐变背景 */
+            color: #333;
             text-align: center;
-            font-size: inherit; 
-            font-family: inherit; 
-            color: inherit; 
-            box-sizing: border-box; 
-            font-weight: 500; 
+            overflow-x: hidden; /* 防止水平滚动条 */
         }
-        /* 红色字体表示需要注意的成绩 */
-        .score-red {
-            color: red;
+
+        .header {
+            background-color: #ff6f61; /* 活力红 */
+            color: white;
+            padding: 50px 20px;
+            font-size: 3em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInDown 1s ease-out; /* 头部动画 */
         }
-        /* 黑色字体，用于分数大于等于60时 */
-        .score-black {
-            color: black;
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header span {
+            display: block;
+            font-size: 0.6em;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        .section {
+            padding: 60px 20px;
+            margin: 0 auto;
+            max-width: 1000px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out; /* 内容区动画 */
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #ff6f61;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80%;
+            height: 4px;
+            background-color: #ffb3ba; /* 浅红线 */
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* 图片画廊样式 (同时适用于回忆画廊和截屏展示区) */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px; /* 固定高度 */
+            object-fit: cover; /* 裁剪图片以填充容器 */
+            display: block;
+        }
+        
+        /* 底部 */
+        .footer {
+            margin-top: 50px;
+            padding: 30px 20px;
+            background-color: #ffb3ba; /* 浅红 */
+            color: #a04050; /* 深一点的红色 */
+            font-size: 0.9em;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header {
+                font-size: 2em;
+                padding: 30px 15px;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .section {
+                padding: 40px 15px;
+                margin: 20px auto;
+            }
+            .gallery-container {
+                grid-template-columns: 1fr; /* 小屏幕上单列显示 */
+            }
         }
     </style>
 </head>
+<body>
 
-<body onload="focusInput()">
-<center>
+    <div class="header">
+        叶岷轩 生日快乐！
+        <span>祝你未来闪耀，每一天都充满惊喜！</span>
+    </div>
 
-<center><b>成绩资料</b><br>
+    <div class="section">
+        <h2>🎉 我们的回忆画廊 🎉</h2>
+        <div class="gallery-container">
+            <div class="gallery-item"><jpg src="https://drive.google.com/file/d/1smC6FRsmyd_p-9tiGN3fkL79eVmevZEy/view?usp=sharing" alt="关于MX的照片"></div>
+            <div class="gallery-item"><img src="https://drive.google.com/uc?export=view&id=替换为你的第二张GoogleDrive图片文件ID" alt="关于MX的照片"></div>
+            <div class="gallery-item"><img src="https://drive.google.com/uc?export=view&id=替换为你的第三张GoogleDrive图片文件ID" alt="关于MX的照片"></div>
+        </div>
+    </div>
 
-<div class="input-section" id="studentIdInputSection">
-    <label for="studentIdInput">输入学号:</label>
-    <input type="text" id="studentIdInput" onkeyup="updateStudentId()" placeholder="例如: XX-XXX"> 
-</div>
+    <div class="section">
+        <h2>💌 留下你的祝福 💌</h2>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScnyRFD14zqo-vfkMHejWxSdC0UL7fSuCoE5WRi6Vq4tz7H9g/viewform?embedded=true" width="640" height="689" frameborder="0" marginheight="0" marginwidth="0">正在加载…</iframe>
+        <p style="margin-top: 20px; color: #666;">（提交祝福后，你可以在 Google 表格中查看到它！）</p>
+    </div>
 
-<div class="input-section" id="nameInputSection">
-    <label for="nameInput">输入姓名:</label>
-    <input type="text" id="nameInput" placeholder="例如: XXX XXXX XXXX XXXX"> 
-    <button onclick="updateName()">完成</button>
-</div>
+    ---
 
-<div class="input-section" id="classNumInputSection">
-    <label for="classNumInput">输入班号:</label>
-    <input type="text" id="classNumInput" onkeyup="updateClassNum()" placeholder="例如: XX">
-</div>
+    <div class="section">
+        <h2>📸 精彩瞬间截屏 📸</h2>
+        <div class="gallery-container">
+            <div class="gallery-item"><img src="https://drive.google.com/uc?export=view&id=替换为你的唯一截屏图片文件ID" alt="精彩截屏"></div>
+        </div>
+    </div>
 
-<div class="input-section" id="photoInputSection">
-    <label for="photoUrlInput">输入照片网址:</label>
-    <input type="text" id="photoUrlInput" placeholder="例如: www.XXXX.jpg"> <button onclick="updatePhoto()">显示照片</button>
-</div>
+    <div class="footer">
+        <p>&copy; 2024 专属叶岷轩的生日祝福网站. All Rights Reserved.</p>
+    </div>
 
-<table border="1" cellspacing="0" cellpadding="2" width="450" style="font-size:10pt;font-family:Arial;">
-    <tbody>
-        <tr>
-            <td width="53" align="center">姓名</td>
-            <td width="250" id="displayedName">XXX XXXX XXXX XXXX</td> 
-            <td rowspan="4" width="100" align="center">
-                <div id="studentPhoto">
-                    <img id="dynamicPhoto" src="" alt="学生照片">
-                    <span id="photoPlaceholderText">照片占位符</span>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="53" align="center">学号</td>
-            <td id="displayedStudentId">XX-XXX</td> 
-        </tr>
-        <tr>
-            <td width="53" align="center">班号</td>
-            <td id="displayedClassNum">XX</td> 
-        </tr>
-    </tbody>
-</table><br>
-
-<center><b>成绩资料</b></center>
-<table border="1" cellspacing="0" cellpadding="2">
-    <tbody>
-        <tr bgcolor="skyblue" align="center">
-            <td width="160">科目</td><td>点数</td>
-            <td width="115">上半年统一测验</td><td width="115">上半年考试</td><td width="115">上半年总平均</td>
-            <td width="115">下半年统一测验</td><td width="115">下半年考试</td><td width="115">下半年总平均</td>
-            <td width="115">学年总平均</td>
-        </tr>
-        <tr align="center"><td align="left">初中华文</td><td>6.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr align="center"><td align="left">初中马来西亚文</td><td>6.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr align="center"><td align="left">初中英文</td><td>6.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr align="center"><td align="left">初中数学</td><td>6.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr align="center"><td align="left">科学</td><td>6.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr align="center"><td align="left">地理</td><td>3.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr align="center"><td align="left">历史</td><td>3.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></td></tr>
-        <tr align="center"><td align="left">电脑 PYTHON</td><td>2.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr align="center"><td align="left">美术</td><td>1.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr align="center"><td align="left">体育</td><td>2.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr align="center"><td align="left">联课活动</td><td>2.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr align="center"><td align="left">创客</td><td>2.00</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td><td class="editable-score">未公布</td></tr>
-        <tr bgcolor="skyblue" align="center"><td colspan="2" align="center">总点数</td>
-            <td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td></tr>
-        <tr bgcolor="skyblue" align="center"><td colspan="2" align="center">总分</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td></tr>
-        <tr bgcolor="skyblue" align="center"><td colspan="2" align="center">总平均</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td></tr>
-        <tr bgcolor="skyblue" align="center"><td colspan="2" align="center">缺席扣分</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td></tr>
-        <tr bgcolor="skyblue" align="center"><td colspan="2" align="center">实得</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td></tr>
-        <tr bgcolor="skyblue" align="center"><td colspan="2" align="center">操行</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td></tr>
-        <tr bgcolor="skyblue" align="center"><td colspan="2" align="center">名次</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td><td class="editable-score" data-ignore-color="true">未公布</td></tr>
-    </tbody>
-</table>
-<table width="600" id="noticeTable">
-<tbody><tr><td>
-请班导师和家长注意 : <br>
-&nbsp;&nbsp;&nbsp;&nbsp;本系统显示之资料为即时性资料,在成绩单未发出前,成绩和出缺席等资料在各行政单位(教务处/训导处/联课处)处理过程中还会有变动,一切资料将在成绩单和各班成绩总表发出后才正式确定.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;特此通知.
-</td></tr>
-</tbody></table>
-<br></center>
-
-<script>
-    // 在页面加载完成后，自动将焦点设置到学号输入框
-    function focusInput() {
-        document.getElementById("studentIdInput").focus();
-    }
-
-    // 当输入框内容改变时，更新显示的学号并隐藏输入框
-    function updateStudentId() {
-        var inputElement = document.getElementById("studentIdInput");
-        var displayElement = document.getElementById("displayedStudentId");
-        var inputSection = document.getElementById("studentIdInputSection");
-
-        var inputValue = inputElement.value;
-        displayElement.textContent = inputValue; 
-
-        // 检查学号是否已经输入完整 (假设学号是 6 位，例如 "XX-XXX")
-        if (inputValue.length === 6) {
-            inputSection.style.display = "none";
-            document.getElementById("nameInput").focus(); // 焦点转移到姓名输入框
-        } else {
-            inputSection.style.display = "block";
-        }
-    }
-
-    // 更新姓名的函数 - 现在由“完成”按钮触发
-    function updateName() {
-        var inputElement = document.getElementById("nameInput");
-        var displayElement = document.getElementById("displayedName");
-        var inputSection = document.getElementById("nameInputSection");
-
-        var inputValue = inputElement.value;
-        if (inputValue.trim() !== "") { // 只有在输入内容不为空时才更新并隐藏
-            displayElement.textContent = inputValue;
-            inputSection.style.display = "none";
-            document.getElementById("classNumInput").focus(); // 焦点转移到班号输入框
-        } else {
-            alert("请输入姓名！"); // 提示用户输入姓名
-            inputElement.focus();
-        }
-    }
-
-    // 更新班号的函数
-    function updateClassNum() {
-        var inputElement = document.getElementById("classNumInput");
-        var displayElement = document.getElementById("displayedClassNum");
-        var inputSection = document.getElementById("classNumInputSection");
-
-        var inputValue = inputElement.value;
-        displayElement.textContent = inputValue;
-
-        // 示例：如果班号是1或2位数字，则隐藏并转移焦点到照片网址输入框
-        if (inputValue.length >= 1 && inputValue.length <= 2 && /^\d+$/.test(inputValue)) {
-            inputSection.style.display = "none";
-            document.getElementById("photoUrlInput").focus(); // 焦点转移到照片URL输入框
-        } else {
-            inputSection.style.display = "block";
-        }
-    }
-
-    // 更新照片的函数
-    function updatePhoto() {
-        var photoUrlInput = document.getElementById("photoUrlInput");
-        var dynamicPhoto = document.getElementById("dynamicPhoto");
-        var photoPlaceholderText = document.getElementById("photoPlaceholderText");
-        var photoInputSection = document.getElementById("photoInputSection"); // 获取照片输入框的父元素
-        var photoUrl = photoUrlInput.value;
-
-        if (photoUrl) { // 如果输入了网址
-            dynamicPhoto.src = photoUrl; // 设置图片源
-            photoPlaceholderText.style.display = "none"; // 隐藏占位符文本
-
-            // 添加错误处理，如果图片加载失败，显示回占位符文本
-            dynamicPhoto.onerror = function() {
-                dynamicPhoto.src = ""; // 清空错误的图片源
-                photoPlaceholderText.style.display = "block"; // 重新显示占位符文本
-                alert("照片加载失败，请检查网址是否正确。");
-                photoInputSection.style.display = "block"; // 错误时重新显示输入框
-            };
-
-            // 图片加载成功后，隐藏照片输入区域
-            dynamicPhoto.onload = function() {
-                photoInputSection.style.display = "none";
-            };
-
-        } else { // 如果没有输入网址或清空了网址
-            dynamicPhoto.src = ""; // 清空图片源
-            photoPlaceholderText.style.display = "block"; // 显示占位符文本
-            photoInputSection.style.display = "block"; // 没有网址时保持显示输入框
-        }
-    }
-
-    // 新增：使成绩单元格可编辑的逻辑
-    document.addEventListener('DOMContentLoaded', function() {
-        var scoreCells = document.querySelectorAll('.editable-score');
-
-        // 在页面加载时，遍历所有 .editable-score 单元格，并根据其初始值设置颜色
-        scoreCells.forEach(function(cell) {
-            applyScoreColor(cell); // 初始应用颜色
-            
-            cell.addEventListener('click', function() {
-                if (cell.querySelector('input')) {
-                    return; // 如果当前单元格已在编辑模式，则不执行任何操作
-                }
-
-                var originalValue = cell.textContent.trim();
-                var originalClassList = Array.from(cell.classList); // 获取所有当前类名
-
-                var input = document.createElement('input');
-                input.type = 'text';
-                input.dataset.originalCellText = originalValue; 
-                input.value = (originalValue === '未公布' || originalValue === '-' || originalValue === '&nbsp;') ? '' : originalValue.replace(/,/g, ''); 
-                input.style.textAlign = 'center';
-
-                cell.textContent = ''; // 清空单元格内容
-                cell.appendChild(input);
-                input.focus(); // 聚焦输入框
-                input.select(); // 选中所有文本，方便用户直接输入
-
-                // 当输入框失去焦点时保存更改
-                input.addEventListener('blur', function() {
-                    saveChanges(cell, input, originalClassList);
-                });
-
-                // 当按下Enter键时保存更改
-                input.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        saveChanges(cell, input, originalClassList);
-                    }
-                });
-            });
-        });
-
-        // 独立的函数来根据分数应用颜色
-        function applyScoreColor(cell) {
-            // 检查单元格是否带有 data-ignore-color="true" 属性
-            if (cell.dataset.ignoreColor === 'true') {
-                cell.classList.remove('score-red', 'score-black'); // 移除所有颜色类
-                return; // 不再执行颜色逻辑，保持默认（黑色）
-            }
-
-            const textContent = cell.textContent.trim();
-            const scoreValue = parseFloat(textContent.replace(/,/g, '')); // 移除逗号进行解析
-
-            // 只有当内容是有效数字时才应用颜色逻辑
-            if (!isNaN(scoreValue)) {
-                cell.classList.remove('score-red', 'score-black'); // 先移除所有分数颜色类
-                if (scoreValue >= 60) {
-                    cell.classList.add('score-black');
-                } else {
-                    cell.classList.add('score-red');
-                }
-            } else {
-                // 如果不是数字（如 "未公布", "-", "&nbsp;"），确保移除颜色类，保持默认
-                cell.classList.remove('score-red', 'score-black');
-            }
-        }
-
-
-        function saveChanges(cell, inputElement, originalClassList) {
-            var newValue = inputElement.value.trim();
-            var initialCellText = inputElement.dataset.originalCellText; 
-
-            if (newValue === '' && (initialCellText === '未公布' || initialCellText === '-' || initialCellText === '&nbsp;')) {
-                cell.textContent = initialCellText;
-            } else if (newValue === '' && (cell.classList.contains('editable-score') && cell.cellIndex !== 0 && cell.cellIndex !== 1)) {
-                cell.textContent = '&nbsp;'; 
-            } else if (newValue === '未公布' || newValue === '-' || newValue === '&nbsp;' || !isNaN(parseFloat(newValue.replace(/,/g, '')))) {
-                cell.textContent = newValue;
-                
-                if (cell.closest('tr') && cell.closest('tr').cells[0] && cell.closest('tr').cells[0].textContent.includes('总分') && cell.cellIndex >= 2) {
-                    const parsedValue = parseFloat(newValue.replace(/,/g, ''));
-                    if (!isNaN(parsedValue)) {
-                        cell.textContent = parsedValue.toLocaleString();
-                    }
-                }
-                
-                // *** 成绩颜色逻辑现在在 applyScoreColor 函数中处理 ***
-                applyScoreColor(cell); // 保存后应用颜色
-
-            } else {
-                alert("请输入有效的成绩。"); 
-                cell.textContent = initialCellText; 
-            }
-
-            // 恢复所有原始类名。注意，如果单元格带有 data-ignore-color="true"，applyScoreColor 会覆盖掉 score-red/black
-            cell.className = ''; 
-            originalClassList.forEach(cls => cell.classList.add(cls));
-            applyScoreColor(cell); // 确保在恢复原始类后再次调用 applyScoreColor，以确保颜色类被正确应用
-        }
-    });
-</script>
-
-</center></body>
+</body>
 </html>
