@@ -16,7 +16,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f7f6;
             color: #333;
-            overflow: hidden; /* Prevent body scroll when using page-container transform */
+            /* Removed overflow: hidden; from body - let content dictate body height */
         }
 
         /* Layout Container */
@@ -29,7 +29,9 @@
             background-color: #fff;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
             position: relative;
-            overflow: hidden; /* Ensure pages within are clipped */
+            /* Changed to allow vertical scrolling within the app container itself */
+            overflow-y: auto; 
+            overflow-x: hidden; /* Keep horizontal overflow hidden for pages sliding */
         }
 
         /* Header */
@@ -148,22 +150,23 @@
         .pages-container {
             display: flex;
             width: 300%; /* For 3 pages */
-            height: 100%;
+            height: 100%; /* Take full height of app-container content area */
             transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
             will-change: transform;
+            flex-grow: 1; /* Allow pages-container to take available space */
         }
 
         .page {
             width: 100%;
             flex-shrink: 0;
-            overflow-y: auto; /* Enable scrolling for each page */
-            padding-bottom: 70px; /* Space for nav-bar */
+            overflow-y: auto; /* Enable scrolling for each page's content if needed */
+            padding-bottom: 20px; /* Adjust padding to ensure content above nav-bar */
         }
 
         /* Page 1: Home */
         .home-page {
             padding: 0 20px;
-            flex-grow: 1;
+            /* flex-grow: 1; is handled by pages-container now */
         }
 
         .section-title {
@@ -260,7 +263,7 @@
         /* Page 2: Activities */
         .activities-page { /* Changed from services-page */
             padding: 0 20px;
-            flex-grow: 1;
+            /* flex-grow: 1; is handled by pages-container now */
         }
 
         .no-activities-message {
@@ -326,7 +329,7 @@
         .members-page { /* Changed from profile-page */
             padding: 20px;
             text-align: center;
-            flex-grow: 1;
+            /* flex-grow: 1; is handled by pages-container now */
         }
 
         .member-pic { /* Changed from profile-pic */
@@ -603,6 +606,7 @@
                 margin-top: 20px;
                 margin-bottom: 20px;
                 min-height: calc(100vh - 40px);
+                overflow-y: visible; /* On desktop, let body scroll, app-container visible */
             }
 
             .header {
@@ -641,18 +645,18 @@
             }
 
             .pages-container {
-                display: block;
+                display: block; /* Stack pages vertically */
                 width: 100%;
-                height: auto;
-                transform: none !important;
-                overflow-y: visible;
+                height: auto; /* Allow pages to take natural height */
+                transform: none !important; /* Disable horizontal swipe transform */
+                overflow-y: visible; /* Pages should not scroll internally on desktop, content flows */
             }
 
             .page {
                 width: auto;
-                min-height: 80vh;
+                min-height: auto; /* Let content dictate height */
                 padding: 30px;
-                overflow-y: visible;
+                overflow-y: visible; /* Content should overflow to app-container scroll */
                 padding-bottom: 30px;
             }
 
@@ -702,7 +706,7 @@
             }
 
             body {
-                overflow-y: auto;
+                overflow-y: auto; /* Allow body scrolling on desktop */
             }
         }
     </style>
@@ -733,7 +737,7 @@
                         <p>测验将于8月18日举行，请同学们提前做好准备。</p>
                     </div>
                     <div class="countdown-timer">
-                        距离下半年统一测验还有 24 天！
+                        距离下半年统一测验还有 23 天！
                     </div>
                 </section>
 
@@ -881,13 +885,15 @@
             if (window.innerWidth >= 768) {
                 navBar.classList.add('hidden');
                 pageIndicator.classList.add('hidden');
-                document.body.style.overflowY = 'auto'; // Allow body scrolling on desktop
-                appContainer.style.overflow = 'visible'; // Allow app-container to expand
+                // On desktop, app-container overflow-y becomes visible, body handles scrolling
+                appContainer.style.overflowY = 'visible'; 
+                document.body.style.overflowY = 'auto'; 
             } else {
                 navBar.classList.remove('hidden');
                 pageIndicator.classList.remove('hidden');
-                document.body.style.overflowY = 'hidden'; // Prevent body scrolling on mobile
-                appContainer.style.overflow = 'hidden'; // Keep app-container tight on mobile
+                // On mobile, app-container handles scrolling, body overflow remains default/unset
+                appContainer.style.overflowY = 'auto'; 
+                document.body.style.overflowY = 'unset'; 
             }
 
             navItems.forEach((item, index) => {
@@ -931,18 +937,13 @@
             tutorialOverlay.classList.add('show');
             navBar.classList.add('hidden');
             pageIndicator.classList.add('hidden');
-            document.body.style.overflowY = 'hidden';
+            document.body.style.overflowY = 'hidden'; // Hide body scroll during tutorial
         }
 
         function hideTutorial() {
             tutorialOverlay.classList.remove('show');
-            if (window.innerWidth < 768) {
-                navBar.classList.remove('hidden');
-                pageIndicator.classList.remove('hidden');
-                document.body.style.overflowY = 'hidden';
-            } else {
-                document.body.style.overflowY = 'auto';
-            }
+            // Restore appropriate overflow after tutorial
+            updatePageDisplay(); 
             currentTutorialStep = 0;
         }
 
