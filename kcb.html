@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
+    <title>初三（5）课程表</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            padding: 10px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            text-align: center;
+            margin: 15px 0 20px;
+        }
+        .header h1 {
+            color: #1890ff;
+            font-size: 1.5em;
+        }
+        .class-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 默认两列布局 */
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .info-card {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .info-card strong {
+            display: block;
+            color: #1890ff;
+            margin-bottom: 5px;
+        }
+
+        /* 针对桌面版调整info-card的网格位置 */
+        .info-card:nth-child(1) { /* 班级 */
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .info-card:nth-child(2) { /* 班导 */
+            grid-column: 2;
+            grid-row: 1;
+        }
+        .info-card:nth-child(3) { /* 总课时 */
+            grid-column: 1 / span 2; /* 跨越两列 */
+            grid-row: 2;
+        }
+
+
+        /* 格子布局 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .day-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .day-header {
+            background-color: #1890ff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .periods {
+            padding: 5px;
+        }
+        .period-item {
+            margin-bottom: 8px;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 0.9em;
+        }
+        .period-time {
+            color: #666;
+            font-size: 0.8em;
+            margin-bottom: 3px;
+        }
+        .period-subject {
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        .period-teacher {
+            color: #888;
+            font-size: 0.8em;
+        }
+        /* 特殊时段样式 */
+        .break, .meeting, .lunch {
+            background-color: #e6f7ff;
+            border-color: #bae7ff;
+        }
+
+        /* 教师统计 */
+        .teachers-title {
+            text-align: center;
+            margin: 25px 0 15px;
+            color: #1890ff;
+            font-size: 1.2em;
+        }
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .teacher-card {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .teacher-name {
+            font-weight: bold;
+        }
+        .teacher-hours {
+            color: #1890ff;
+            font-weight: bold;
+        }
+        .teacher-subject {
+            color: #888;
+            font-size: 0.8em;
+            margin-top: 3px;
+        }
+
+        /* 返回按钮样式 */
+        .return-button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .return-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #4CAF50; /* 绿色按钮，您可以更改颜色 */
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .return-button:hover {
+            background-color: #45a049;
+        }
+
+
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .class-info {
+                grid-template-columns: 1fr; /* 在小屏幕上改为单列 */
+            }
+            /* 在小屏幕上取消特定网格位置的设置，让其自然流式布局 */
+            .info-card:nth-child(1),
+            .info-card:nth-child(2),
+            .info-card:nth-child(3) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+            .teachers-grid {
+                grid-template-columns: 1fr;
+            }
+            .period-item {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>初三（5）课程表</h1>
+    </div>
+
+    <div class="class-info">
+        <div class="info-card">
+            <strong>班级</strong>
+            <span>初三（5）</span>
+        </div>
+        <div class="info-card">
+            <strong>班导</strong>
+            <span>郑俊健</span>
+        </div>
+        <div class="info-card">
+            <strong>总课时</strong>
+            <span>44节</span>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        <div class="day-card">
+            <div class="day-header">星期一</div>
+            <div class="periods">
+                <div class="period-item meeting">
+                    <div class="period-time">07:30-07:45</div>
+                    <div class="period-subject">班会</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">07:45-08:25</div>
+                    <div class="period-subject">华文</div>
+                    <div class="period-teacher">余珮颖</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">08:25-09:05</div>
+                    <div class="period-subject">科学</div>
+                    <div class="period-teacher">黄伟聪</div>
+                </div>
+                <div class="period-item break">
+                    <div class="period-time">09:05-09:30</div>
+                    <div class="period-subject">下课</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">09:30-10:10</div>
+                    <div class="period-subject">地理</div>
+                    <div class="period-teacher">梁国强</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">10:10-10:50</div>
+                    <div class="period-subject">英文</div>
+                    <div class="period-teacher">林倩倩</div>
+                </div>
+                <div class="period-item break">
+                    <div class="period-time">10:50-11:10</div>
+                    <div class="period-subject">下课</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">11:10-11:50</div>
+                    <div class="period-subject">科学</div>
+                    <div class="period-teacher">黄伟聪</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">11:50-12:30</div>
+                    <div class="period-subject">数学</div>
+                    <div class="period-teacher">何智宇</div>
+                </div>
+                <div class="period-item lunch">
+                    <div class="period-time">12:30-13:10</div>
+                    <div class="period-subject">午休</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">13:10-13:50</div>
+                    <div class="period-subject">创客</div>
+                    <div class="period-teacher">张志铭,罗杰礼</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">13:50-14:30</div>
+                    <div class="period-subject">创客</div>
+                    <div class="period-teacher">张志铭,罗杰礼</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">14:30-15:10</div>
+                    <div class="period-subject">国文</div>
+                    <div class="period-teacher">蔡瑞萍</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">星期二</div>
+            <div class="periods">
+                <div class="period-item meeting">
+                    <div class="period-time">07:30-07:45</div>
+                    <div class="period-subject">晨读</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">07:45-08:25</div>
+                    <div class="period-subject">美术</div>
+                    <div class="period-teacher">冯玉珍</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">08:25-09:05</div>
+                    <div class="period-subject">科学</div>
+                    <div class="period-teacher">黄伟聪</div>
+                </div>
+                <div class="period-item break">
+                    <div class="period-time">09:05-09:30</div>
+                    <div class="period-subject">下课</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">09:30-10:10</div>
+                    <div class="period-subject">数学</div>
+                    <div class="period-teacher">何智宇</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">10:10-10:50</div>
+                    <div class="period-subject">英文</div>
+                    <div class="period-teacher">林倩倩</div>
+                </div>
+                <div class="period-item break">
+                    <div class="period-time">10:50-11:10</div>
+                    <div class="period-subject">下课</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">11:10-11:50</div>
+                    <div class="period-subject">华文</div>
+                    <div class="period-teacher">余珮颖</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">11:50-12:30</div>
+                    <div class="period-subject">国文</div>
+                    <div class="period-teacher">蔡瑞萍</div>
+                </div>
+                <div class="period-item lunch">
+                    <div class="period-time">12:30-13:10</div>
+                    <div class="period-subject">午休</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">13:10-13:50</div>
+                    <div class="period-subject">电脑</div>
+                    <div class="period-teacher">郑俊健</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">13:50-14:30</div>
+                    <div class="period-subject">电脑</div>
+                    <div class="period-teacher">郑俊健</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">星期三</div>
+            <div class="periods">
+                <div class="period-item meeting">
+                    <div class="period-time">07:30-07:45</div>
+                    <div class="period-subject">班会</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">07:45-08:25</div>
+                    <div class="period-subject">历史</div>
+                    <div class="period-teacher">蔡思云</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">08:25-09:05</div>
+                    <div class="period-subject">地理</div>
+                    <div class="period-teacher">梁国强</div>
+                </div>
+                <div class="period-item break">
+                    <div class="period-time">09:05-09:30</div>
+                    <div class="period-subject">下课</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">09:30-10:10</div>
+                    <div class="period-subject">体育</div>
+                    <div class="period-teacher">黎尧安</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">10:10-10:50</div>
+                    <div class="period-subject">体育</div>
+                    <div class="period-teacher">黎尧安</div>
+                </div>
+                <div class="period-item break">
+                    <div class="period-time">10:50-11:10</div>
+                    <div class="period-subject">下课</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">11:10-11:50</div>
+                    <div class="period-subject">华文</div>
+                    <div class="period-teacher">余珮颖</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">11:50-12:30</div>
+                    <div class="period-subject">科学</div>
+                    <div class="period-teacher">黄伟聪</div>
+                </div>
+                <div class="period-item lunch">
+                    <div class="period-time">12:30-13:10</div>
+                    <div class="period-subject">午休</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">13:10-13:50</div>
+                    <div class="period-subject">国文</div>
+                    <div class="period-teacher">蔡瑞萍</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">13:50-14:30</div>
+                    <div class="period-subject">数学</div>
+                    <div class="period-teacher">何智宇</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">14:30-15:10</div>
+                    <div class="period-subject">英文</div>
+                    <div class="period-teacher">林倩倩</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">15:10-15:50</div>
+                    <div class="period-subject">英文</div>
+                    <div class="period-teacher">林倩倩</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">星期四</div>
+            <div class="periods">
+                <div class="period-item meeting">
+                    <div class="period-time">07:30-07:45</div>
+                    <div class="period-subject">晨读</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">07:45-08:25</div>
+                    <div class="period-subject">数学</div>
+                    <div class="period-teacher">何智宇</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">08:25-09:05</div>
+                    <div class="period-subject">历史</div>
+                    <div class="period-teacher">蔡思云</div>
+                </div>
+                <div class="period-item break">
+                    <div class="period-time">09:05-09:30</div>
+                    <div class="period-subject">下课</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">09:30-10:10</div>
+                    <div class="period-subject">数学</div>
+                    <div class="period-teacher">何智宇</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">10:10-10:50</div>
+                    <div class="period-subject">英文</div>
+                    <div class="period-teacher">林倩倩</div>
+                </div>
+                <div class="period-item break">
+                    <div class="period-time">10:50-11:10</div>
+                    <div class="period-subject">下课</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">11:10-11:50</div>
+                    <div class="period-subject">国文</div>
+                    <div class="period-teacher">蔡瑞萍</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">11:50-12:30</div>
+                    <div class="period-subject">科学</div>
+                    <div class="period-teacher">黄伟聪</div>
+                </div>
+                <div class="period-item lunch">
+                    <div class="period-time">12:30-13:10</div>
+                    <div class="period-subject">午休</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">13:10-13:50</div>
+                    <div class="period-subject">华文</div>
+                    <div class="period-teacher">余珮颖</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">13:50-14:30</div>
+                    <div class="period-subject">华文</div>
+                    <div class="period-teacher">余珮颖</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">星期五</div>
+            <div class="periods">
+                <div class="period-item meeting">
+                    <div class="period-time">07:30-07:45</div>
+                    <div class="period-subject">班会</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">07:45-08:25</div>
+                    <div class="period-subject">科学</div>
+                    <div class="period-teacher">黄伟聪</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">08:25-09:05</div>
+                    <div class="period-subject">辅导</div>
+                    <div class="period-teacher">郑雅君</div>
+                </div>
+                <div class="period-item break">
+                    <div class="period-time">09:05-09:30</div>
+                    <div class="period-subject">下课</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">09:30-10:10</div>
+                    <div class="period-subject">地理</div>
+                    <div class="period-teacher">梁国强</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">10:10-10:50</div>
+                    <div class="period-subject">英活动</div>
+                    <div class="period-teacher">杨晓慧,林倩倩</div>
+                </div>
+                <div class="period-item break">
+                    <div class="period-time">10:50-11:10</div>
+                    <div class="period-subject">下课</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">11:10-11:50</div>
+                    <div class="period-subject">华文</div>
+                    <div class="period-teacher">余珮颖</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">11:50-12:30</div>
+                    <div class="period-subject">数学</div>
+                    <div class="period-teacher">何智宇</div>
+                </div>
+                <div class="period-item lunch">
+                    <div class="period-time">12:30-13:10</div>
+                    <div class="period-subject">午休</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">13:10-13:50</div>
+                    <div class="period-subject">国文</div>
+                    <div class="period-teacher">蔡瑞萍</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">13:50-14:30</div>
+                    <div class="period-subject">国文</div>
+                    <div class="period-teacher">蔡瑞萍</div>
+                </div>
+                <div class="period-item">
+                    <div class="period-time">14:30-15:10</div>
+                    <div class="period-subject">历史</div>
+                    <div class="period-teacher">蔡思云</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="teachers-title">教师课时统计</div>
+    <div class="teachers-grid">
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">余珮颖</div>
+                <div class="teacher-subject">华文</div>
+            </div>
+            <div class="teacher-hours">6节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">蔡瑞萍</div>
+                <div class="teacher-subject">国文</div>
+            </div>
+            <div class="teacher-hours">6节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">林倩倩</div>
+                <div class="teacher-subject">英文</div>
+            </div>
+            <div class="teacher-hours">5节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">杨晓慧,林倩倩</div>
+                <div class="teacher-subject">英活动</div>
+            </div>
+            <div class="teacher-hours">1节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">何智宇</div>
+                <div class="teacher-subject">数学</div>
+            </div>
+            <div class="teacher-hours">6节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">黄伟聪</div>
+                <div class="teacher-subject">科学</div>
+            </div>
+            <div class="teacher-hours">6节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">梁国强</div>
+                <div class="teacher-subject">地理</div>
+            </div>
+            <div class="teacher-hours">3节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">蔡思云</div>
+                <div class="teacher-subject">历史</div>
+            </div>
+            <div class="teacher-hours">3节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">冯玉珍</div>
+                <div class="teacher-subject">美术</div>
+            </div>
+            <div class="teacher-hours">1节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">黎尧安</div>
+                <div class="teacher-subject">体育</div>
+            </div>
+            <div class="teacher-hours">2节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">张志铭,罗杰礼</div>
+                <div class="teacher-subject">创客</div>
+            </div>
+            <div class="teacher-hours">2节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">郑雅君</div>
+                <div class="teacher-subject">辅导</div>
+            </div>
+            <div class="teacher-hours">1节</div>
+        </div>
+        <div class="teacher-card">
+            <div>
+                <div class="teacher-name">郑俊健</div>
+                <div class="teacher-subject">电脑</div>
+            </div>
+            <div class="teacher-hours">2节</div>
+        </div>
+    </div>
+
+    <div class="return-button-container">
+        <a href="https://www.google.com" target="_blank" class="return-button">返回首页</a>
+    </div>
+
+</body>
+</html>
