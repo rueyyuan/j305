@@ -147,19 +147,21 @@
             text-align: center;
             margin: 30px 0;
         }
-        .return-button {
+        .close-button { /* 更改类名为close-button */
             display: inline-block;
             padding: 12px 25px;
-            background-color: #4CAF50; /* 绿色按钮，您可以更改颜色 */
+            background-color: #f44336; /* 改为红色，表示关闭 */
             color: white;
             text-decoration: none;
             border-radius: 6px;
             font-size: 1.1em;
             transition: background-color 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer; /* 添加光标提示 */
+            border: none; /* 移除边框 */
         }
-        .return-button:hover {
-            background-color: #45a049;
+        .close-button:hover {
+            background-color: #d32f2f; /* 鼠标悬停时颜色变深 */
         }
 
 
@@ -578,10 +580,12 @@
         </div>
         <div class="teacher-card">
             <div>
-                <div class="teacher-name">黄伟聪</div>
-                <div class="teacher-subject">科学</div>
+                <div>
+                    <div class="teacher-name">黄伟聪</div>
+                    <div class="teacher-subject">科学</div>
+                </div>
+                <div class="teacher-hours">6节</div>
             </div>
-            <div class="teacher-hours">6节</div>
         </div>
         <div class="teacher-card">
             <div>
@@ -635,8 +639,26 @@
     </div>
 
     <div class="return-button-container">
-        <a href="https://rueyyuan.github.io/yuan/a.html" target="_blank" class="return-button">返回首页</a>
+        <button onclick="closeCurrentWindow()" class="close-button">返回主页</button>
     </div>
 
+    <script>
+    function closeCurrentWindow() {
+        // 尝试关闭当前窗口。
+        // 注意：出于安全原因，现代浏览器通常会阻止由用户未明确发起的脚本关闭窗口。
+        // 这意味着如果这个标签页不是通过 window.open() 打开的，
+        // 或者用户没有与页面充分互动，此功能可能无法工作。
+        window.close();
+
+        // 作为备用方案，如果 window.close() 失败，可以尝试重定向到空白页
+        // 或者提供一个提示。
+        // 例如：
+        // setTimeout(function() {
+        //     if (!window.closed) {
+        //         alert("由于浏览器安全限制，无法自动关闭此页面。请手动关闭。");
+        //     }
+        // }, 100);
+    }
+    </script>
 </body>
 </html>
