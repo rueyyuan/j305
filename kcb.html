@@ -128,13 +128,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            min-height: 60px; /* 确保所有卡片有统一的最小高度 */
+        }
+        .teacher-info {
+            flex: 1;
         }
         .teacher-name {
             font-weight: bold;
+            font-size: 0.9em;
+            word-break: break-word; /* 防止长名字溢出 */
         }
         .teacher-hours {
             color: #1890ff;
             font-weight: bold;
+            font-size: 1em;
+            flex-shrink: 0; /* 防止课时数被压缩 */
         }
         .teacher-subject {
             color: #888;
@@ -185,6 +193,15 @@
             }
             .period-item {
                 padding: 10px;
+            }
+            /* 在手机上确保教师卡片统一高度 */
+            .teacher-card {
+                min-height: 70px;
+                padding: 15px 12px;
+            }
+            .teacher-name {
+                font-size: 1em;
+                line-height: 1.2;
             }
         }
     </style>
@@ -544,93 +561,91 @@
     <div class="teachers-title">教师课时统计</div>
     <div class="teachers-grid">
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">余珮颖</div>
                 <div class="teacher-subject">华文</div>
             </div>
             <div class="teacher-hours">6节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">蔡瑞萍</div>
                 <div class="teacher-subject">国文</div>
             </div>
             <div class="teacher-hours">6节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">林倩倩</div>
                 <div class="teacher-subject">英文</div>
             </div>
             <div class="teacher-hours">5节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">杨晓慧,林倩倩</div>
                 <div class="teacher-subject">英活动</div>
             </div>
             <div class="teacher-hours">1节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">何智宇</div>
                 <div class="teacher-subject">数学</div>
             </div>
             <div class="teacher-hours">6节</div>
         </div>
         <div class="teacher-card">
-            <div>
-                <div>
-                    <div class="teacher-name">黄伟聪</div>
-                    <div class="teacher-subject">科学</div>
-                </div>
-                <div class="teacher-hours">6节</div>
+            <div class="teacher-info">
+                <div class="teacher-name">黄伟聪</div>
+                <div class="teacher-subject">科学</div>
             </div>
+            <div class="teacher-hours">6节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">梁国强</div>
                 <div class="teacher-subject">地理</div>
             </div>
             <div class="teacher-hours">3节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">蔡思云</div>
                 <div class="teacher-subject">历史</div>
             </div>
             <div class="teacher-hours">3节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">冯玉珍</div>
                 <div class="teacher-subject">美术</div>
             </div>
             <div class="teacher-hours">1节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">黎尧安</div>
                 <div class="teacher-subject">体育</div>
             </div>
             <div class="teacher-hours">2节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">张志铭,罗杰礼</div>
                 <div class="teacher-subject">创客</div>
             </div>
             <div class="teacher-hours">2节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">郑雅君</div>
                 <div class="teacher-subject">辅导</div>
             </div>
             <div class="teacher-hours">1节</div>
         </div>
         <div class="teacher-card">
-            <div>
+            <div class="teacher-info">
                 <div class="teacher-name">郑俊健</div>
                 <div class="teacher-subject">电脑</div>
             </div>
