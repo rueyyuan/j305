@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我们的班级 - 初三（5）</title>
+    <!-- 添加此行以更换网站标题旁的图标（favicon）。 -->
+    <!-- 将下面的 'href' 链接替换为您自己的图片文件路径（例如 .png, .ico 或 .svg）。 -->
+    <link rel="icon" href="j305._chhs2025.jpg" type="image/jpeg">
     <style>
         /* 定义CSS变量，方便统一管理颜色和间距 */
         :root {
@@ -31,7 +34,7 @@
         }
         body {
             /* 移除 Noto Sans SC 和 Roboto，只使用系统通用字体 */
-            font-family: -apple-system, BlinkMacMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
             background-color: var(--background-light);
@@ -85,6 +88,17 @@
         nav a:hover {
             background-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
+        }
+        
+        /* 新增：班级照片样式 */
+        .class-photo {
+            /* 调整图片大小 */
+            width: 70%;
+            max-width: 800px;
+            display: block; /* 居中显示 */
+            margin: var(--spacing-large) auto;
+            border-radius: var(--border-radius-base);
+            box-shadow: 0 4px 12px var(--shadow-medium);
         }
 
         /* 主要内容容器 */
@@ -278,6 +292,9 @@
                 padding: var(--spacing-small);
                 font-size: 0.9em;
             }
+            .class-photo {
+                margin: var(--spacing-medium) auto;
+            }
             .container {
                 width: 95%; /* 在中等屏幕上增加容器宽度 */
             }
@@ -349,6 +366,9 @@
         <a href="https://rueyyuan.wordpress.com" target="_blank">投稿墙</a>
     </nav>
 
+    <!-- 新增：班级合照，位于导航栏下方 -->
+    <img src="j305._chhs2025.jpg" alt="初三（5）班级合照" class="class-photo">
+
     <div class="container">
         <!-- 班级简介内容区块 -->
         <section id="班级简介" class="section">
@@ -387,7 +407,7 @@
         <section id="值日表" class="section">
             <h2>八月 固定卫生值日表</h2>
             <div class="spreadsheet-container">
-                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSgFNMRVdkyMQ_WkJpoyVVO2GMxOrowZiGWbGQwDH_X5HswK2qXL76nEh0AyAN63lsTGlDe9NdWKqG6/pubhtml?gid=0&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false&amp;rm=minimal"></iframe>
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSgFNMRVdkyMQ_WkJpoyVVO2GMxOrowZiGWbGQwDH_X5H5HswK2qXL76nEh0AyAN63lsTGlDe9NdWKqG6/pubhtml?gid=0&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false&amp;rm=minimal"></iframe>
             </div>
         </section>
         
@@ -465,9 +485,10 @@
         }
 
         // 页面加载完成后立即更新一次倒数，然后每秒更新
+        let countdownInterval;
         window.onload = function() {
             updateCountdown(); // Initial call to display countdown immediately
-            const countdownInterval = setInterval(updateCountdown, 1000); // Update every 1 second
+            countdownInterval = setInterval(updateCountdown, 1000); // Update every 1 second
         };
     </script>
 </body>
