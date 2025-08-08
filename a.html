@@ -95,11 +95,11 @@
         .header-image {
             display: block;
             width: 100%;
-            max-width: 1200px;
+            max-width: 800px; /* 调整：限制图片的最大宽度，让图片整体变小 */
+            height: auto; /* 调整：确保保持图片的原始比例 */
             margin: var(--spacing-large) auto;
             border-radius: var(--border-radius-base);
             box-shadow: 0 4px 8px var(--shadow-medium);
-            height: auto;
         }
 
         /* 主要内容容器 */
@@ -364,7 +364,8 @@
         <a href="https://rueyyuan.wordpress.com" target="_blank">投稿墙</a>
     </nav>
     
-    <!-- 导航栏下方的图片，已移除辅助文字 -->
+    <!-- 导航栏下方的图片 -->
+    <!-- 提醒：请确保 j305._chhs2025.jpg 这个图片文件存在且与HTML文件在同一目录下。 -->
     <img src="j305._chhs2025.jpg" alt="" class="header-image">
 
 
@@ -374,7 +375,6 @@
             <h2>班级简介</h2>
             <p>欢迎来到初三（5）的网站。</p>
             <p>班级口号：自动自发，自律自强。</p>
-            <p>班导：郑俊健师</p>
         </section>
 
         <!-- 重要通知内容区块 -->
