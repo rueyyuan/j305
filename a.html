@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 更新后的网页标题 -->
     <title>初三（5）班级网</title>
+    <!-- 新增：将 j305._chhs2025.jpg 设置为网页图标 -->
+    <!-- 注意：为了更好的兼容性，通常推荐使用 .ico 格式的图标。 -->
+    <link rel="shortcut icon" href="j305._chhs2025.jpg" type="image/jpeg">
     <style>
         /* 定义CSS变量，方便统一管理颜色和间距 */
         :root {
@@ -85,6 +89,17 @@
         nav a:hover {
             background-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
+        }
+        
+        /* 导航栏下方的图片样式 */
+        .header-image {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            margin: var(--spacing-large) auto;
+            border-radius: var(--border-radius-base);
+            box-shadow: 0 4px 8px var(--shadow-medium);
+            height: auto;
         }
 
         /* 主要内容容器 */
@@ -348,6 +363,10 @@
         <!-- 投稿墙导航按钮 -->
         <a href="https://rueyyuan.wordpress.com" target="_blank">投稿墙</a>
     </nav>
+    
+    <!-- 导航栏下方的图片，已移除辅助文字 -->
+    <img src="j305._chhs2025.jpg" alt="" class="header-image">
+
 
     <div class="container">
         <!-- 班级简介内容区块 -->
