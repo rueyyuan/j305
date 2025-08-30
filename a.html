@@ -207,55 +207,6 @@
             box-shadow: 0 -2px 4px var(--shadow-light);
         }
 
-        /* 倒数计时器样式 */
-        .countdown-section {
-            text-align: center;
-            background-color: var(--card-background);
-            padding: var(--spacing-large);
-            margin-bottom: var(--spacing-large);
-            border-radius: var(--border-radius-base);
-            box-shadow: 0 4px 12px var(--shadow-medium);
-            transition: transform 0.3s ease;
-        }
-        .countdown-section:hover {
-            transform: translateY(-5px);
-        }
-        .countdown-section h2 {
-            color: var(--primary-color);
-            font-size: 1.8em;
-            margin-bottom: var(--spacing-medium);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: var(--spacing-small);
-            font-weight: 700;
-        }
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: var(--spacing-medium);
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-        }
-        .countdown-item {
-            background-color: var(--primary-dark);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            font-size: 2em;
-            font-weight: 700;
-            min-width: 100px;
-            box-shadow: 0 2px 5px var(--shadow-medium);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .countdown-item span {
-            font-size: 0.5em;
-            font-weight: 400;
-            margin-top: 5px;
-            opacity: 0.8;
-        }
-
         /* iframe 样式 */
         .spreadsheet-container {
             position: relative;
@@ -296,10 +247,10 @@
             .container {
                 width: 95%; /* 在中等屏幕上增加容器宽度 */
             }
-            .section, .countdown-section {
+            .section {
                 padding: var(--spacing-medium);
             }
-            .section h2, .countdown-section h2 {
+            .section h2 {
                 font-size: 1.5em;
             }
             /* 手机上表格可能需要滚动 */
@@ -309,30 +260,17 @@
                 white-space: nowrap; /* 防止内容在单元格内换行 */
                 -webkit-overflow-scrolling: touch; /* iOS上的平滑滚动 */
             }
-            .countdown-item {
-                font-size: 1.5em;
-                padding: 10px 15px;
-                min-width: 80px;
-            }
         }
 
         @media (max-width: 480px) {
             header h1 {
                 font-size: 1.5em;
             }
-            .section h2, .countdown-section h2 {
+            .section h2 {
                 font-size: 1.3em;
             }
-            .section, .countdown-section {
+            .section {
                 padding: var(--spacing-small); /* 在小屏幕上调整section内边距 */
-            }
-            .countdown-timer {
-                gap: 10px;
-            }
-            .countdown-item {
-                font-size: 1.2em;
-                padding: 8px 12px;
-                min-width: 60px;
             }
         }
     </style>
@@ -346,8 +284,8 @@
     <nav>
         <!-- 班级简介导航按钮 -->
         <a href="#班级简介">班级简介</a>
-        <!-- 重要通知导航按钮 -->
-        <a href="#重要通知">重要通知</a>
+        <!-- 通知导航按钮 -->
+        <a href="#通知">通知</a>
         <!-- 课程表导航按钮，点击会跳转到外部网站 -->
         <a href="https://rueyyuan.github.io/yuan/kcb.html" target="_blank">课程表</a>
         <!-- 功课导航按钮 -->
@@ -356,8 +294,6 @@
         <a href="#固定座位表">固定座位表</a>
         <!-- 值日表导航按钮 -->
         <a href="#值日表">值日表</a>
-        <!-- 倒数计时导航按钮 -->
-        <a href="#倒数计时">倒数计时</a>
         <!-- 投稿墙投稿导航按钮 -->
         <a href="https://forms.gle/obe1yXxRsy7Er2Yt6" target="_blank">投稿墙投稿</a>
         <!-- 投稿墙导航按钮 -->
@@ -375,14 +311,14 @@
             <h2>班级简介</h2>
             <p>欢迎来到初三（5）的网站。</p>
             <p>班级口号：自动自发，自律自强。</p>
+            <p>班导：郑俊健 师。</p>
         </section>
 
-        <!-- 重要通知内容区块 -->
-        <section id="重要通知" class="section">
-            <h2>重要通知</h2>
-            <p>请同学们密切关注以下最新通知：</p>
+        <!-- 通知内容区块 -->
+        <section id="通知" class="section">
+            <h2>通知</h2>
             <ul>
-                <li><strong>2025年8月18日：</strong>下半年统一测验。</li>
+                <li>无通知</li>
             </ul>
         </section>
 
@@ -390,13 +326,13 @@
         <section id="功课" class="section">
             <h2>功课（一个星期改一次一下的内容）</h2>
             <ul>
-                <li><strong>地理：</strong>小测验。</li>
+                <li>无功课</li>
             </ul>
         </section>
 
         <!-- 固定座位表内容区块 -->
         <section id="固定座位表" class="section">
-            <h2>八月 固定座位表</h2>
+            <h2>九月 座位表</h2>
             <div class="spreadsheet-container">
                 <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQY1ZPzfNLTFMcoQfZvxGlCyXISLza97z0Mu1pP1GUybNvlqMgE2I8qAEKuozIE7ryxQFPtrFbAbDfL/pubhtml?gid=0&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false"></iframe>
             </div>
@@ -404,34 +340,10 @@
 
         <!-- 值日表内容区块 -->
         <section id="值日表" class="section">
-            <h2>八月 固定卫生值日表</h2>
+            <h2>值日生固定职位（每周各个职位里换人）</h2>
             <div class="spreadsheet-container">
                 <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSgFNMRVdkyMQ_WkJpoyVVO2GMxOrowZiGWbGQwDH_X5HswK2qXL76nEh0AyAN63lsTGlDe9NdWKqG6/pubhtml?gid=0&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false&amp;rm=minimal"></iframe>
             </div>
-        </section>
-        
-        <!-- 倒数计时器区块 -->
-        <section id="倒数计时" class="countdown-section">
-            <h2>下半年统一测验倒数</h2>
-            <div class="countdown-timer">
-                <div class="countdown-item">
-                    <span id="days">00</span>
-                    <span>天</span>
-                </div>
-                <div class="countdown-item">
-                    <span id="hours">00</span>
-                    <span>小时</span>
-                </div>
-                <div class="countdown-item">
-                    <span id="minutes">00</span>
-                    <span>分钟</span>
-                </div>
-                <div class="countdown-item">
-                    <span id="seconds">00</span>
-                    <span>秒</span>
-                </div>
-            </div>
-            <p id="countdown-message" style="margin-top: 20px; font-size: 1.1em; color: var(--primary-dark); font-weight: 500;"></p>
         </section>
     </div>
 
@@ -439,55 +351,5 @@
         <p>&copy; 2025 初三（5）. 保留所有权利。</p>
         <p>由 元 与 Gemini 设计与维护。</p>
     </footer>
-
-    <script>
-        // 设置倒数计时器的目标日期和时间 (2025年8月18日 00:00:00)
-        // 注意：JavaScript的月份是从0开始的，所以8月是7
-        const targetDate = new Date('2025-08-18T00:00:00').getTime();
-
-        // 获取倒数计时器的显示元素
-        const daysElement = document.getElementById('days');
-        const hoursElement = document.getElementById('hours');
-        const minutesElement = document.getElementById('minutes');
-        const secondsElement = document.getElementById('seconds');
-        const countdownMessage = document.getElementById('countdown-message');
-
-        // 更新倒数计时器函数
-        function updateCountdown() {
-            const now = new Date().getTime(); // 获取当前时间
-            const distance = targetDate - now; // 计算距离目标日期的时间差 (毫秒)
-
-            // 如果时间差小于0，表示倒数已经结束
-            if (distance < 0) {
-                clearInterval(countdownInterval); // 停止计时器
-                daysElement.textContent = '00';
-                hoursElement.textContent = '00';
-                minutesElement.textContent = '00';
-                secondsElement.textContent = '00';
-                countdownMessage.textContent = '测验已开始！祝同学们考试顺利！';
-                return;
-            }
-
-            // 计算天数、小时、分钟和秒
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // 格式化数字，确保始终是两位数
-            daysElement.textContent = String(days).padStart(2, '0');
-            hoursElement.textContent = String(hours).padStart(2, '0');
-            minutesElement.textContent = String(minutes).padStart(2, '0');
-            secondsElement.textContent = String(seconds).padStart(2, '0');
-
-            countdownMessage.textContent = `距离测验还有 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
-        }
-
-        // 页面加载完成后立即更新一次倒数，然后每秒更新
-        window.onload = function() {
-            updateCountdown(); // Initial call to display countdown immediately
-            const countdownInterval = setInterval(updateCountdown, 1000); // Update every 1 second
-        };
-    </script>
 </body>
 </html>
