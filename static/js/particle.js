@@ -1,3 +1,12 @@
+/* -----------------------------------------------
+/* Author : Vincent Garreau  - vincentgarreau.com
+/* MIT license: http://opensource.org/licenses/MIT
+/* Demo / Generator : vincentgarreau.com/particles.js
+/* GitHub : github.com/VincentGarreau/particles.js
+/* How to use? : Check the GitHub README
+/* v2.0.0
+/* ----------------------------------------------- */
+
 var pJS = function(tag_id, params){
 
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
@@ -14,7 +23,7 @@ var pJS = function(tag_id, params){
         value: 80,
         density: {
           enable: true,
-          value_area: 800
+          value_area: 400
         }
       },
       color: {
@@ -56,10 +65,10 @@ var pJS = function(tag_id, params){
         }
       },
       line_linked: {
-        enable: true,
-        distance: 100,
-        color: '#fff',
-        opacity: 1,
+        enable: false,
+        distance: 150,
+        color: '#ffffff',
+        opacity: 0.4,
         width: 1
       },
       move: {
@@ -85,7 +94,7 @@ var pJS = function(tag_id, params){
           enable: false,
           mode: 'grab'
         },
-        onclick: {
+        a: {
           enable: false,
           mode: 'push'
         },
@@ -589,11 +598,11 @@ var pJS = function(tag_id, params){
         pJS.fn.modes.grabParticle(p);
       }
 
-      if(isInArray('bubble', pJS.interactivity.events.onhover.mode) || isInArray('bubble', pJS.interactivity.events.onclick.mode)){
+      if(isInArray('bubble', pJS.interactivity.events.onhover.mode) || isInArray('bubble', pJS.interactivity.events.a.mode)){
         pJS.fn.modes.bubbleParticle(p);
       }
 
-      if(isInArray('repulse', pJS.interactivity.events.onhover.mode) || isInArray('repulse', pJS.interactivity.events.onclick.mode)){
+      if(isInArray('repulse', pJS.interactivity.events.onhover.mode) || isInArray('repulse', pJS.interactivity.events.a.mode)){
         pJS.fn.modes.repulseParticle(p);
       }
 
@@ -849,7 +858,7 @@ var pJS = function(tag_id, params){
     }
 
     /* on click event */
-    else if(pJS.interactivity.events.onclick.enable && isInArray('bubble', pJS.interactivity.events.onclick.mode)){
+    else if(pJS.interactivity.events.a.enable && isInArray('bubble', pJS.interactivity.events.a.mode)){
 
 
       if(pJS.tmp.bubble_clicking){
@@ -941,7 +950,7 @@ var pJS = function(tag_id, params){
     }
 
 
-    else if(pJS.interactivity.events.onclick.enable && isInArray('repulse', pJS.interactivity.events.onclick.mode)) {
+    else if(pJS.interactivity.events.a.enable && isInArray('repulse', pJS.interactivity.events.a.mode)) {
 
       if(!pJS.tmp.repulse_finish){
         pJS.tmp.repulse_count++;
@@ -1061,7 +1070,7 @@ var pJS = function(tag_id, params){
 
 
     /* detect mouse pos - on hover / click event */
-    if(pJS.interactivity.events.onhover.enable || pJS.interactivity.events.onclick.enable){
+    if(pJS.interactivity.events.onhover.enable || pJS.interactivity.events.a.enable){
 
       /* el on mousemove */
       pJS.interactivity.el.addEventListener('mousemove', function(e){
@@ -1099,7 +1108,7 @@ var pJS = function(tag_id, params){
     }
 
     /* on click event */
-    if(pJS.interactivity.events.onclick.enable){
+    if(pJS.interactivity.events.a.enable){
 
       pJS.interactivity.el.addEventListener('click', function(){
 
@@ -1107,9 +1116,9 @@ var pJS = function(tag_id, params){
         pJS.interactivity.mouse.click_pos_y = pJS.interactivity.mouse.pos_y;
         pJS.interactivity.mouse.click_time = new Date().getTime();
 
-        if(pJS.interactivity.events.onclick.enable){
+        if(pJS.interactivity.events.a.enable){
 
-          switch(pJS.interactivity.events.onclick.mode){
+          switch(pJS.interactivity.events.a.mode){
 
             case 'push':
               if(pJS.particles.move.enable){
