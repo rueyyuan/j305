@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 更新后的网页标题 -->
     <title>初三（5）班级网</title>
+    <!-- 新增：将 Pictures/j305._chhs2025.jpg 设置为网页图标 -->
+    <!-- 注意：为了更好的兼容性，通常推荐使用 .ico 格式的图标。 -->
     <link rel="shortcut icon" href="Pictures/j305._chhs2025.jpg" type="image/jpeg">
     <style>
         /* 定义CSS变量，方便统一管理颜色和间距 */
@@ -204,6 +207,28 @@
             box-shadow: 0 -2px 4px var(--shadow-light);
         }
 
+        /* iframe 样式 */
+        .spreadsheet-container {
+            position: relative;
+            width: 100%;
+            height: 500px; /* 您可以在这里调整高度以适应表格内容 */
+            overflow: hidden;
+            border-radius: var(--border-radius-base);
+            box-shadow: 0 2px 8px var(--shadow-light);
+            margin-top: var(--spacing-medium);
+        }
+
+        .spreadsheet-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--border-radius-base);
+        }
+
+
         /* 响应式设计 */
         @media (max-width: 768px) {
             body {
@@ -257,20 +282,31 @@
     </header>
 
     <nav>
+        <!-- 班级简介导航按钮 -->
         <a href="#班级简介">班级简介</a>
+        <!-- 通知导航按钮 -->
         <a href="#通知">通知</a>
+        <!-- 课程表导航按钮，点击会跳转到外部网站 -->
         <a href="https://rueyyuan.github.io/yuan/kcb.html" target="_blank">课程表</a>
+        <!-- 功课导航按钮 -->
         <a href="#功课">功课</a>
+        <!-- 固定座位表导航按钮 -->
         <a href="#固定座位表">固定座位表</a>
+        <!-- 值日表导航按钮 -->
         <a href="#值日表">值日表</a>
+        <!-- 投稿墙投稿导航按钮 -->
         <a href="https://forms.gle/obe1yXxRsy7Er2Yt6" target="_blank">投稿墙投稿</a>
+        <!-- 投稿墙导航按钮 -->
         <a href="https://rueyyuan.wordpress.com" target="_blank">投稿墙</a>
     </nav>
     
+    <!-- 导航栏下方的图片 -->
+    <!-- 提醒：请确保 Pictures/j305._chhs2025.jpg 这个图片文件存在且与HTML文件在同一目录下。 -->
     <img src="Pictures/j305._chhs2025.jpg" alt="" class="header-image">
 
 
     <div class="container">
+        <!-- 班级简介内容区块 -->
         <section id="班级简介" class="section">
             <h2>班级简介</h2>
             <p>欢迎来到初三（5）的网站。</p>
@@ -278,6 +314,7 @@
             <p>班导：郑俊健 师。</p>
         </section>
 
+        <!-- 通知内容区块 -->
         <section id="通知" class="section">
             <h2>通知</h2>
             <ul>
@@ -285,6 +322,7 @@
             </ul>
         </section>
 
+        <!-- 功课内容区块 -->
         <section id="功课" class="section">
             <h2>功课（一个星期改一次一下的内容）</h2>
             <ul>
@@ -292,18 +330,20 @@
             </ul>
         </section>
 
+        <!-- 固定座位表内容区块 -->
         <section id="固定座位表" class="section">
             <h2>九月 座位表</h2>
-            <p>
-                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQY1ZPzfNLTFMcoQfZvxGlCyXISLza97z0Mu1pP1GUybNvlqMgE2I8qAEKuozIE7ryxQFPtrFbAbDfL/pubhtml" target="_blank">点击此处查看九月座位表</a>
-            </p>
+            <div class="spreadsheet-container">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQY1ZPzfNLTFMcoQfZvxGlCyXISLza97z0Mu1pP1GUybNvlqMgE2I8qAEKuozIE7ryxQFPtrFbAbDfL/pubhtml?gid=0&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false"></iframe>
+            </div>
         </section>
 
+        <!-- 值日表内容区块 -->
         <section id="值日表" class="section">
             <h2>值日生固定职位（每周各个职位里换人）</h2>
-            <p>
-                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSgFNMRVdkyMQ_WkJpoyVVO2GMxOrowZiGWbGQwDH_X5HswK2qXL76nEh0AyAN63lsTGlDe9NdWKqG6/pubhtml" target="_blank">点击此处查看值日生固定职位表</a>
-            </p>
+            <div class="spreadsheet-container">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSgFNMRVdkyMQ_WkJpoyVVO2GMxOrowZiGWbGQwDH_X5HswK2qXL76nEh0AyAN63lsTGlDe9NdWKqG6/pubhtml?gid=0&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false&amp;rm=minimal"></iframe>
+            </div>
         </section>
     </div>
 
