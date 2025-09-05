@@ -90,7 +90,7 @@ var pJS = function(tag_id, params){
     interactivity: {
       detect_on: 'canvas',
       events: {
-        onhover: {
+        a: {
           enable: false,
           mode: 'grab'
         },
@@ -594,15 +594,15 @@ var pJS = function(tag_id, params){
       }
 
       /* events */
-      if(isInArray('grab', pJS.interactivity.events.onhover.mode)){
+      if(isInArray('grab', pJS.interactivity.events.a.mode)){
         pJS.fn.modes.grabParticle(p);
       }
 
-      if(isInArray('bubble', pJS.interactivity.events.onhover.mode) || isInArray('bubble', pJS.interactivity.events.a.mode)){
+      if(isInArray('bubble', pJS.interactivity.events.a.mode) || isInArray('bubble', pJS.interactivity.events.a.mode)){
         pJS.fn.modes.bubbleParticle(p);
       }
 
-      if(isInArray('repulse', pJS.interactivity.events.onhover.mode) || isInArray('repulse', pJS.interactivity.events.a.mode)){
+      if(isInArray('repulse', pJS.interactivity.events.a.mode) || isInArray('repulse', pJS.interactivity.events.a.mode)){
         pJS.fn.modes.repulseParticle(p);
       }
 
@@ -789,7 +789,7 @@ var pJS = function(tag_id, params){
   pJS.fn.modes.bubbleParticle = function(p){
 
     /* on hover event */
-    if(pJS.interactivity.events.onhover.enable && isInArray('bubble', pJS.interactivity.events.onhover.mode)){
+    if(pJS.interactivity.events.a.enable && isInArray('bubble', pJS.interactivity.events.a.mode)){
 
       var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
           dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
@@ -923,7 +923,7 @@ var pJS = function(tag_id, params){
 
   pJS.fn.modes.repulseParticle = function(p){
 
-    if(pJS.interactivity.events.onhover.enable && isInArray('repulse', pJS.interactivity.events.onhover.mode) && pJS.interactivity.status == 'mousemove') {
+    if(pJS.interactivity.events.a.enable && isInArray('repulse', pJS.interactivity.events.a.mode) && pJS.interactivity.status == 'mousemove') {
 
       var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
           dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
@@ -1021,7 +1021,7 @@ var pJS = function(tag_id, params){
 
   pJS.fn.modes.grabParticle = function(p){
 
-    if(pJS.interactivity.events.onhover.enable && pJS.interactivity.status == 'mousemove'){
+    if(pJS.interactivity.events.a.enable && pJS.interactivity.status == 'mousemove'){
 
       var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
           dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
@@ -1070,7 +1070,7 @@ var pJS = function(tag_id, params){
 
 
     /* detect mouse pos - on hover / click event */
-    if(pJS.interactivity.events.onhover.enable || pJS.interactivity.events.a.enable){
+    if(pJS.interactivity.events.a.enable || pJS.interactivity.events.a.enable){
 
       /* el on mousemove */
       pJS.interactivity.el.addEventListener('mousemove', function(e){
