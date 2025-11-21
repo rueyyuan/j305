@@ -372,11 +372,13 @@
 	    this.x = this.fn.x(this.x, this.y);
 	    this.y = this.fn.y(this.y, this.y);
 	    this.r = this.fn.r(this.r);
-	    if(this.x > window.innerWidth ||
-	        this.x < 0 ||
-	        this.y > window.innerHeight ||
-	        this.y < 0
-	    ) {
+	   var pageHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+	       
+	       if(this.x > window.innerWidth ||
+	           this.x < 0 ||
+	           this.y > pageHeight ||  // 修改这里：检测整个网页高度
+	           this.y < 0
+	       ) {
 	        this.r = getRandom('fnr');
 	        if(Math.random() > 0.4) {
 	            this.x = getRandom('x');
@@ -384,10 +386,8 @@
 	            this.s = getRandom('s');
 	            this.r = getRandom('r');
 	        } else {
-	            this.x = window.innerWidth;
-	            this.y = getRandom('y');
-	            this.s = getRandom('s');
-	            this.r = getRandom('r');
+				this.x = window.innerWidth;
+	            this.y = getRandom('y'); // 这里也要确保随机位置是对的
 	        }
 	    }
 	}
@@ -422,7 +422,8 @@
 	            ret = Math.random() * window.innerWidth;
 	            break;
 	        case 'y':
-	            ret = Math.random() * window.innerHeight;
+	            // 让花瓣可以在网页的任意高度生成
+	            ret = Math.random() * Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
 	            break;
 	        case 's':
 	            ret = Math.random();
@@ -462,9 +463,13 @@
 	    var canvas = document.createElement('canvas'),
 	        cxt;
 	    staticx = true;
-	    canvas.height = window.innerHeight;
+	    // 获取整个网页的完整高度，而不仅仅是屏幕高度
+	    var pageHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+	        
+	    canvas.height = pageHeight;
 	    canvas.width = window.innerWidth;
-	    canvas.setAttribute('style', 'position: fixed;left: 0;top: 0;pointer-events: none; z-index: 50;');
+	    // 改为 absolute，并保留之前的层级设置(z-index:50)
+	    canvas.setAttribute('style', 'position: absolute;left: 0;top: 0;pointer-events: none; z-index: 50;');
 	    canvas.setAttribute('id', 'canvas_sakura');
 	    document.getElementsByTagName('body')[0].appendChild(canvas);
 	    cxt = canvas.getContext('2d');
