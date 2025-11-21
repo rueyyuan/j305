@@ -86,10 +86,10 @@
       color: #555;
     }
 
-    /* --- 奖状网格 (改回了大图模式) --- */
+    /* --- 奖状网格 --- */
     .certificates {
       display: grid;
-      /* 恢复为 200px，这样在手机窄屏上会变成一行一张，图片更大 */
+      /* 电脑端保持原样：自适应 */
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 16px;
       margin-top: 20px;
@@ -100,8 +100,6 @@
       cursor: pointer;
       overflow: hidden;
       border-radius: 10px;
-      /* 移除了强制 3:4 比例，恢复原始图片长宽比，避免裁剪 */
-      /* aspect-ratio: 3/4; */ 
       background: #eee;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
@@ -123,7 +121,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) rotate(-30deg);
-      font-size: 1.5em; /* 稍微调大一点，因为图片变大了 */
+      font-size: 1.5em;
       color: rgba(255,255,255,0.6);
       pointer-events: none;
       font-weight: bold;
@@ -131,7 +129,7 @@
       white-space: nowrap;
     }
 
-    /* --- 修复后的 Modal (弹窗 - 保持不动，因为这个修复很好) --- */
+    /* --- 修复后的 Modal (弹窗) --- */
     .modal {
       display: none;
       position: fixed;
@@ -219,6 +217,7 @@
       border-top: 1px solid #eee;
     }
 
+    /* --- 移动端特定优化 --- */
     @media (max-width: 600px) {
       header {
         font-size: 1.4em;
@@ -230,6 +229,18 @@
       h2 {
         font-size: 1.1em;
       }
+      
+      /* 手机端强制双排设置 */
+      .certificates {
+        grid-template-columns: repeat(2, 1fr) !important; /* 强制两列 */
+        gap: 8px; /* 间距调小，让图片尽量大 */
+      }
+      
+      /* 手机端双排时，水印字号调小，防止挡住图片 */
+      .watermark {
+        font-size: 1.0em; 
+      }
+
       .modal-content .watermark-large {
         font-size: 2em;
       }
